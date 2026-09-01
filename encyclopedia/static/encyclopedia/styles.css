@@ -31,6 +31,7 @@ textarea {
     background-color: #f0f0f0;
     height: 100vh;
     padding: 20px;
+    padding-right: 10px;
 }
 
 .sidebar h2 {
@@ -69,4 +70,9 @@ textarea {
     100%{
         background-color: rgb(94 171 195);
     }
+}
+
+#enty_pges{
+    color: black;
+    font-size: 18px;
 }

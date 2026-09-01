@@ -9,7 +9,7 @@
 
     <ul>
         {% for entry in entries %}
-            <li id="item">{{ entry }}</li>
+            <li id="item"><a id="enty_pges" href="{% url 'entry' entry %}">{{ entry }}</a></li>
         {% endfor %}
     </ul>
 
