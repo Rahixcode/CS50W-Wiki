@@ -44,3 +44,4 @@ def random_page(request):
 
 def add_page(request):
     return render(request, "encyclopedia/new_page.html")
+
