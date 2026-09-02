@@ -9,7 +9,8 @@ from django import forms
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
-        "entries": util.list_entries()
+        "entries": util.list_entries(),
+        "nav": ""
     })
 
 def entry(request, title):
@@ -23,6 +24,26 @@ def entry(request, title):
             "title": title,
             "content": converter(content)
         })
+
+def edit_page(request, title):
+    content = util.get_entry(title)
+    if content is None:
+        return render(request, "encyclopedia/error.html", {
+            "error": f"The requested page named '{title}' was not found."
+        })
+
+    if request.method == "POST":
+        form = NewENtry(request.POST)
+        if form.is_valid():
+            util.save_entry(title, form.cleaned_data["content"])
+            return redirect("wiki:entry", title=title)
+    else:
+        form = NewENtry(initial={"title": title, "content": content})
+
+    return render(request, "encyclopedia/edit_page.html", {
+        "title": title,
+        "form": form
+    })
 
 def converter(text):
     text = re.sub(r"^# (.+?)$", r"<h1>\1</h1>", text, flags=re.MULTILINE)
@@ -41,6 +62,7 @@ def random_page(request):
         return render(request, "encyclopedia/error.html", {
             "error": "No encyclopedia entries exist yet."
         })
+
 
     title = random.choice(entries)
     return redirect("wiki:entry", title=title)
@@ -79,6 +101,10 @@ def add_page(request):
     return render(request, "encyclopedia/new_page.html", {
         "form" : NewENtry()
     })
+
+
+def edit_page(request):
+    return render(request, "encyclopedia/edit_page.html", {"form": NewENtry()})
 
 
 def search(request):
