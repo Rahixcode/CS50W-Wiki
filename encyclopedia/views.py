@@ -57,8 +57,10 @@ class NewENtry(forms.Form):
 
     content = forms.CharField(
         label= "",
-        widget=forms.TextInput(attrs={
+        widget=forms.Textarea(attrs={
             "class": "inp_content",
+            "rows": 0,
+            "placeholder": "Write your page content here...",
         }),
         )
 
@@ -77,3 +79,7 @@ def add_page(request):
     return render(request, "encyclopedia/new_page.html", {
         "form" : NewENtry()
     })
+
+
+def search(request):
+    ...

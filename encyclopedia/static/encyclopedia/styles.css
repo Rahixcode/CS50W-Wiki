@@ -84,3 +84,57 @@ textarea {
     margin-top: -10px;
     margin-left: -10px;
 }
+
+.frm{
+    display: flex;
+    flex-direction: column;
+    padding-left:10px;
+}
+
+.title{
+    width: 75vw;
+    margin-bottom: 20px;
+    transition: all 1.5s cubic-bezier(0.4, 0, 1, 1);
+}
+
+.inp_content{
+    height: 65vh;
+    width: 75vw;
+    margin-bottom: 20px;
+    transition: all 1.5s cubic-bezier(0.4, 0, 1, 1);
+}
+
+.inp_content:focus , .title:focus{
+    background-color: rgb(17 110 48 / 50%);
+    animation: box;
+    transition: all 1.5s cubic-bezier(0.05, 0.58, 0.25, 1);
+}
+@keyframes box{
+    0%{
+        
+    }
+    100%{
+        background-color: rgb(17 110 48 / 50%);
+    }
+}
+
+#btn{
+    width: 100px;
+    align-content: right;
+    background-color: rgb(123 193 147 / 50%);
+    transition: all 0.5s cubic-bezier(0.4, 0, 1, 1);
+}
+
+#btn:hover{
+    background-color: rgb(2 79 28 / 50%);
+    animation: botn;
+    transition: all 0.5s cubic-bezier(0.4, 0, 1, 1);
+}
+@keyframes botn{
+    0%{
+        
+    }
+    100%{
+        background-color: rgb(2 79 28 / 50%);
+    }
+}

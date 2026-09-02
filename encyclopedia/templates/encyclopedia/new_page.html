@@ -3,7 +3,7 @@
 {% block title %} Add New Page {% endblock %}
 
 {% block body %}
-<form action="{% url 'wiki:page' %}" method="post">
+<form action="{% url 'wiki:page' %}" method="post" class="frm">
     {% csrf_token %}
 
     <h1>Title</h1>
