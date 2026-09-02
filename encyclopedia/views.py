@@ -92,13 +92,16 @@ def random_page(request):
 def add_page(request):
     if request.method == "POST":
         form = NewENtry(request.POST)
+
         if form.is_valid():
             title = form.cleaned_data["title"]
+
             if any(title.casefold() == name.casefold() for name in util.list_entries()):
                 form.add_error("title", "An entry with this title already exists.")
                 return render(request, "encyclopedia/new_page.html", {
                     "form": form,
                 })
+            
             util.save_entry(form.cleaned_data["title"], form.cleaned_data["content"])
             return HttpResponseRedirect(reverse("wiki:index"))
         else:
@@ -113,11 +116,7 @@ def add_page(request):
 
 def edit_page(request, title):
     content = util.get_entry(title)
-    if content is None:
-        return render(request, "encyclopedia/error.html", {
-            "error": f"The requested page named '{title}' was not found."
-        })
-
+    
     if request.method == "POST":
         form = NewENtry(request.POST)
         if form.is_valid():
