@@ -76,3 +76,11 @@ textarea {
     color: black;
     font-size: 18px;
 }
+
+.content{
+    background-color: rgb(101 124 206 / 50%);
+    padding: 15px;
+    padding-left: 25px;
+    margin-top: -10px;
+    margin-left: -10px;
+}
