@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from . import util
 import re
@@ -28,7 +28,8 @@ class NewENtry(forms.Form):
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries(),
-        "nav": ""
+        "nav": "",
+        "heading": "All Pages",
     })
 
 
@@ -71,8 +72,11 @@ def converter(text):
     text = re.sub(r"^## (.+?)$", r"<h2>\1</h2>", text, flags=re.MULTILINE)
     text = re.sub(r"^### (.+?)$", r"<h3>\1</h3>", text, flags=re.MULTILINE)
     text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
+    text = re.sub(r"\*(.+?)\*", r"<em>\1</em>", text)
     text = re.sub(r"\n", r"<br>\n", text)
     text = re.sub(r"\[([^\]]+)\]\(\/wiki\/([^)]+)\)", r'<a href="/wiki/\2">\1</a>', text)
+    text = re.sub(r"(?m)(?:^- (.+)$|^\* (.+)$)",lambda match: f"<li>{match.group(1) or match.group(2)}</li>",text)
+    text = re.sub(r"((?:<li>.*?</li>\n?)+)", r"<ul>\1</ul>", text)
 
     return text
 
@@ -114,34 +118,30 @@ def add_page(request):
     })
 
 
-def edit_page(request, title):
-    content = util.get_entry(title)
-    
-    if request.method == "POST":
-        form = NewENtry(request.POST)
-        if form.is_valid():
-            util.save_entry(title, form.cleaned_data["content"])
-            return redirect("wiki:entry", title=title)
-    else:
-        form = NewENtry(initial={
-            "title": title,
-            "content": content,
-        })
-
-    return render(request, "encyclopedia/edit_page.html", {
-        "form": form,
-        "title": title,
-    })
-
-
 def search(request):
     que = request.GET.get("q", "").strip()
+    if not que:
+        return render(request, "encyclopedia/error.html", {
+            "error": "Please enter a search term."
+        })
+    
     enty = util.list_entries()
+    reslt = []
 
     for i in enty:
         if i.casefold() == que.casefold():
-            return redirect("wiki:entry", title=i.casefold())
-        if list(que) in list(i):
-            HttpResponse(request, "its wokrs")
-        else:
-            return render(request, "encyclopedia/error.html", {"error": f"The requested page '{que}' was not found"})
+            return redirect("wiki:entry", title=i)
+        
+        if que.casefold() in i.casefold():
+            reslt.append(i)
+
+    if not reslt:
+        return render(request, "encyclopedia/error.html", {
+            "error": f"The requested page '{que}' was not found"
+            })
+
+    return render(request, "encyclopedia/index.html", {
+            "entries": reslt,
+            "nav": "",
+            "heading": "Search Result",
+        })

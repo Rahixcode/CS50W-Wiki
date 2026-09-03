@@ -5,6 +5,6 @@
 {% block body %}
 <div class="content">
         <div class="edit-button"><a href="{% url 'wiki:edit' title=title %}" id="enty_pges">Edit page</a></div>
-        <p> {{ content|safe }} </p>
+        <p> {{ content }} </p>
     </div>
 {% endblock %}
