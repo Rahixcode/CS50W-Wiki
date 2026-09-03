@@ -73,10 +73,10 @@ def converter(text):
     text = re.sub(r"^### (.+?)$", r"<h3>\1</h3>", text, flags=re.MULTILINE)
     text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
     text = re.sub(r"\*(.+?)\*", r"<em>\1</em>", text)
-    text = re.sub(r"\n", r"<br>\n", text)
     text = re.sub(r"\[([^\]]+)\]\(\/wiki\/([^)]+)\)", r'<a href="/wiki/\2">\1</a>', text)
     text = re.sub(r"(?m)(?:^- (.+)$|^\* (.+)$)",lambda match: f"<li>{match.group(1) or match.group(2)}</li>",text)
     text = re.sub(r"((?:<li>.*?</li>\n?)+)", r"<ul>\1</ul>", text)
+    text = re.sub(r"\n", r" ", text, flags=re.MULTILINE)
 
     return text
 
