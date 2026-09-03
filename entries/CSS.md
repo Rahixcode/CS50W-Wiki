@@ -1,3 +1,4 @@
-# CSS
-
-CSS is a language that can be used to add style to an [HTML](/wiki/HTML) page.
+# CSS
+
+- CSS is used to style and design web pages.
+- It controls colors, fonts, layouts, and responsive appearance.

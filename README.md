@@ -2,6 +2,10 @@
 
 A Django-based encyclopedia application for the CS50 Web Programming with Python and JavaScript Wiki project.
 
+---
+Video demo: 
+---
+
 ## Features
 
 - Browse all encyclopedia entries.
