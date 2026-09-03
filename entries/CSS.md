@@ -1,4 +1,4 @@
 # CSS
 
-- CSS is used to style and design web pages.
-- It controls colors, fonts, layouts, and responsive appearance.
+- CSS makes websites visually attractive and easy to use.
+- It lets you adjust spacing, animations, and page layouts.
