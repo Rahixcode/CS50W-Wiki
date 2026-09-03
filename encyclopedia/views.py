@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from . import util
 import re
@@ -135,4 +135,13 @@ def edit_page(request, title):
 
 
 def search(request):
-    ...
+    que = request.GET.get("q", "").strip()
+    enty = util.list_entries()
+
+    for i in enty:
+        if i.casefold() == que.casefold():
+            return redirect("wiki:entry", title=i.casefold())
+        if list(que) in list(i):
+            HttpResponse(request, "its wokrs")
+        else:
+            return render(request, "encyclopedia/error.html", {"error": f"The requested page '{que}' was not found"})
