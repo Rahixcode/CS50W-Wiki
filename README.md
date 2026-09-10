@@ -1,9 +1,18 @@
-# CS50W Wiki
+# <p align="center" style="color: #A7D8F0">CS50W Wiki</p>
 
-A Django-based encyclopedia application for the CS50 Web Programming with Python and JavaScript Wiki project.
+<p align="center">
+  <img src="https://img.shields.io/badge/CS50W-Project%200-blue?style=for-the-badge&logo=harvard" alt="CS50W Project 0">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
+</p>
+
+<p align="center" style="color: #F6E7A1">
+  <b>A Django-based encyclopedia application for the CS50 Web Programming with Python and JavaScript Wiki project.</b>
+</p>
 
 ---
-Video demo: 
+<p align="center" style="color: #B8E0D2">Video Demo: <a href="https://youtu.be/LH6NxV8UAFE">link</a></p>
+
 ---
 
 ## Features
